@@ -1,15 +1,23 @@
 const searchBtn = document.querySelector('.search');
 const result = document.querySelector('.results');
+const sound = document.getElementById("sound");
+
 
 const renderMeaning = function(data){
     const word = data.word;
     const partOfSpeech = data.meanings[0].partOfSpeech;
     const phonetic = data.phonetic? data.phonetic: ""
     const meaning = data.meanings[0].definitions[0].definition;
+    const example = data.meanings[0].definitions[0].example || ""
+    sound.setAttribute("src", `${data.phonetics[0].audio}`)
+    console.log(sound);
 
     const html = `
-            <div class="results--header">
+            <div class="results--header flex justify-between">
                 <h3 class="text-md font-bold text-gray-700">${word}</h3>
+                <button onClick="playSound()">
+                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                </button>
             </div>
             <div class="part--of--speech text-sm text-gray-400 flex mb-8">
                 <p class="mr-2">${partOfSpeech}</p>
@@ -19,7 +27,7 @@ const renderMeaning = function(data){
                 <p>${meaning}</p>
             </div>
             <div class="results--sentence border-l-4 pl-2 pr-12">
-                <p>her eyes were closed and she looked very serene </p>
+                <p>${example} </p>
             </div>
         `;
         result.insertAdjacentHTML('beforeend', html);
@@ -52,9 +60,7 @@ const renderErrorTwo = function (){
         result.insertAdjacentHTML('beforeend', html);
 }
 
-// renderSpinner()
-
-const api = fetch('https://api.dictionaryapi.dev/api/v2/entries/en/cursed').then(res => res.json()).then(data => console.log(data))
+const api = fetch('https://api.dictionaryapi.dev/api/v2/entries/en/car').then(res => res.json()).then(data => console.log(data[0]))
 
 // const getMeaning = function(word){
 //         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
@@ -76,11 +82,10 @@ const getMeaning = async function(word) {
   
       const data = await response.json();
       return renderMeaning(data[0]);
+      
     } 
     catch (error) {
         word.length > 0 ? renderErrorOne()  : renderErrorTwo();
-        // console.error('An error occurred:', error.message);
-        // return null;  or handle the error in a different way
     }
 }
 
@@ -101,3 +106,7 @@ searchBtn.addEventListener('click', function(e){
         searchInput.value = ""
     }, 500);
 })
+
+const playSound = function(){
+    sound.play();
+}
