@@ -26,7 +26,7 @@ const renderMeaning = function(data){
             <div class="results--definition text-gray-600 mb-4">
                 <p>${meaning}</p>
             </div>
-            <div class="results--sentence border-l-4 border-l-red-200 pl-2 pr-12">
+            <div class="results--sentence border-l-4 pl-2 pr-12">
                 <p>${example} </p>
             </div>
         `;

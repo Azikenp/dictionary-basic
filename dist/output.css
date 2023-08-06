@@ -764,6 +764,10 @@ body, button{
   color: rgba(255, 0, 0, 0.326);
 }
 
+.results--sentence{
+  border-left-color: rgba(255, 0, 0, 0.326) ;
+}
+
 .spinner{
   font-size: 40px;
   animation: rotate 1s linear infinite;
