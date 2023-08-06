@@ -12,6 +12,8 @@ const renderMeaning = function(data){
     sound.setAttribute("src", `${data.phonetics[0].audio}`)
     console.log(sound);
 
+
+    //generating html markup to render on search
     const html = `
             <div class="results--header flex justify-between">
                 <h3 class="text-md font-bold text-gray-700">${word}</h3>
@@ -33,6 +35,8 @@ const renderMeaning = function(data){
         result.insertAdjacentHTML('beforeend', html);
 }
 
+
+//spinner function to render when loading
 const renderSpinner = function(){
     const html = `
             <div class="flex justify-center text-gray-400">
@@ -42,6 +46,8 @@ const renderSpinner = function(){
         result.insertAdjacentHTML('beforeend', html);
 }
 
+
+//error message to render when error happens
 const renderErrorOne = function (){
     const html = `
             <div class="error  text-center py-8">
@@ -51,6 +57,7 @@ const renderErrorOne = function (){
         result.insertAdjacentHTML('beforeend', html);
 }
 
+//second error message
 const renderErrorTwo = function (){
     const html = `
             <div class="error  text-center py-8">
@@ -61,7 +68,7 @@ const renderErrorTwo = function (){
 }
 
 
-const api = fetch('https://api.dictionaryapi.dev/api/v2/entries/en/car').then(res => res.json()).then(data => console.log(data[0]))
+// const api = fetch('https://api.dictionaryapi.dev/api/v2/entries/en/car').then(res => res.json()).then(data => console.log(data[0]))
 
 // const getMeaning = function(word){
 //         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
@@ -72,6 +79,8 @@ const api = fetch('https://api.dictionaryapi.dev/api/v2/entries/en/car').then(re
 //         });
 // }
 
+
+//fetching APi function
 const getMeaning = async function(word) {
     let url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
     try {
@@ -86,10 +95,14 @@ const getMeaning = async function(word) {
       
     } 
     catch (error) {
+        //conditionally render an error message  based on the type of error
         word.length > 0 ? renderErrorOne()  : renderErrorTwo();
     }
 }
 
+
+
+//clear view before rendering result
 const clearView = function(){
     result.textContent = ""
 }
@@ -107,6 +120,8 @@ searchBtn.addEventListener('click', function(e){
         searchInput.value = ""
     }, 500);
 })
+
+
 
 const playSound = function(){
     sound.play();
