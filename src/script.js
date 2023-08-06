@@ -37,7 +37,7 @@ const renderSpinner = function(){
 const renderErrorOne = function (){
     const html = `
             <div class="error  text-center py-8">
-                <p class="text-gray-400">Ooops!!! <br> We could't find that word, please try searching for another word.</p>
+                <p class="text-red-400">Ooops!!! <br> We could't find that word, please try searching for another word.</p>
             </div>
         `;
         result.insertAdjacentHTML('beforeend', html);
@@ -46,7 +46,7 @@ const renderErrorOne = function (){
 const renderErrorTwo = function (){
     const html = `
             <div class="error  text-center py-8">
-                <p class="text-gray-400">Please enter a word!</p>
+                <p class="text-red-400">Please enter a word!</p>
             </div>
         `;
         result.insertAdjacentHTML('beforeend', html);
@@ -56,13 +56,32 @@ const renderErrorTwo = function (){
 
 const api = fetch('https://api.dictionaryapi.dev/api/v2/entries/en/cursed').then(res => res.json()).then(data => console.log(data))
 
-const getMeaning = function(word){
-        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
-        .then(res => res.json())
-        .then(data => renderMeaning(data[0]))
-        .catch(error => {
-            word.length > 0 ? renderErrorOne()  : renderErrorTwo();
-        });
+// const getMeaning = function(word){
+//         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+//         .then(res => res.json())
+//         .then(data => renderMeaning(data[0]))
+//         .catch(error => {
+//             word.length > 0 ? renderErrorOne()  : renderErrorTwo();
+//         });
+// }
+
+const getMeaning = async function(word) {
+    let url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+    try {
+      const response = await fetch(url);
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const data = await response.json();
+      return renderMeaning(data[0]);
+    } 
+    catch (error) {
+        word.length > 0 ? renderErrorOne()  : renderErrorTwo();
+        // console.error('An error occurred:', error.message);
+        // return null;  or handle the error in a different way
+    }
 }
 
 const clearView = function(){
