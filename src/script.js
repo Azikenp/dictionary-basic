@@ -20,6 +20,17 @@ const renderMeaning = function(data){
         result.insertAdjacentHTML('beforeend', html);
 }
 
+const renderSpinner = function(){
+    const html = `
+            <div class="flex justify-center text-gray-400">
+                <i class="fa fa-spinner spinner" aria-hidden="true"></i>
+            </div>
+        `;
+        result.insertAdjacentHTML('beforeend', html);
+}
+
+// renderSpinner()
+
 const api = fetch('https://api.dictionaryapi.dev/api/v2/entries/en/cursed').then(res => res.json()).then(data => console.log(data))
 
 const getMeaning = function(word){
@@ -27,9 +38,12 @@ const getMeaning = function(word){
     .then(res => res.json())
     .then(data => renderMeaning(data[0]))
 }
-getMeaning("head")
+
 
 searchBtn.addEventListener('click', function(e){
     e.preventDefault();
-    console.log("ehllo");
+    let searchInput = document.querySelector('input');
+    result.textContent = ""
+    getMeaning(searchInput.value);
+    searchInput.value = ""
 })

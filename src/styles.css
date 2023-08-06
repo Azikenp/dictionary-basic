@@ -6,3 +6,18 @@
 body, button{
     font-family: 'Karla', sans-serif;
 }
+
+.spinner{
+    font-size: 40px;
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate{
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
