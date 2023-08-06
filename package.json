@@ -1,0 +1,14 @@
+{
+  "name": "dictionary",
+  "version": "1.0.0",
+  "description": "dictionary-app",
+  "main": "index.js",
+  "scripts": {
+    "build":"tailwindcss -i ./src/styles.css -o ./dist/output.css --watch"
+  },
+  "author": "Aziken Precious",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
+  }
+}
