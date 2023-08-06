@@ -15,7 +15,7 @@ const renderMeaning = function(data){
     const html = `
             <div class="results--header flex justify-between">
                 <h3 class="text-md font-bold text-gray-700">${word}</h3>
-                <button onClick="playSound()">
+                <button class="sound--btn" onClick="playSound()">
                     <i class="fa fa-microphone" aria-hidden="true"></i>
                 </button>
             </div>
@@ -26,7 +26,7 @@ const renderMeaning = function(data){
             <div class="results--definition text-gray-600 mb-4">
                 <p>${meaning}</p>
             </div>
-            <div class="results--sentence border-l-4 pl-2 pr-12">
+            <div class="results--sentence border-l-4 border-l-red-200 pl-2 pr-12">
                 <p>${example} </p>
             </div>
         `;
@@ -59,6 +59,7 @@ const renderErrorTwo = function (){
         `;
         result.insertAdjacentHTML('beforeend', html);
 }
+
 
 const api = fetch('https://api.dictionaryapi.dev/api/v2/entries/en/car').then(res => res.json()).then(data => console.log(data[0]))
 

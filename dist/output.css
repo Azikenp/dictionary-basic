@@ -760,6 +760,10 @@ body, button{
   font-family: 'Karla', sans-serif;
 }
 
+.sound--btn i{
+  color: rgba(255, 0, 0, 0.326);
+}
+
 .spinner{
   font-size: 40px;
   animation: rotate 1s linear infinite;
