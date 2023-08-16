@@ -4,8 +4,8 @@
   "description": "dictionary-app",
   "main": "index.js",
   "scripts": {
-    "build":"tailwindcss -i ./src/styles.css -o ./dist/output.css",
-    "watch":"tailwindcss -i ./src/styles.css -o ./dist/output.css --watch"
+    "build":"tailwindcss -i ./src/styles.css -o ./public/output.css",
+    "watch":"tailwindcss -i ./src/styles.css -o ./public/output.css --watch"
   },
   "author": "Aziken Precious",
   "license": "ISC",
